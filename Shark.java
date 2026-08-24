@@ -10,6 +10,7 @@ public class Shark extends SeaCreature{
     @Override
     public void move(int tankWidth) {
         position += speed * direction+(int)(Math.random()*3);
+        position -= 1; 
         keepInsideTank(tankWidth);
     }
 

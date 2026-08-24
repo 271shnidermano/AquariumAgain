@@ -1,14 +1,28 @@
 public class Squid extends SeaCreature {
       private String symbol;
+      private int tracker;
+      private int movement; 
 
     public Squid(String name, int position, int speed, int direction) {
         super(name, position, speed, direction);
+        tracker = 0; 
+        movement = 1; 
         symbol = "＜コ：ミ";
     }
 
     @Override
     public void move(int tankWidth) {
-        position += speed * direction+(int)(Math.random()*-3);
+        position += movement;
+        tracker +=movement; 
+        if (tracker == 14)
+        {
+            movement = -1; 
+        }
+        if (tracker == 0)
+        {
+            movement = 1;
+        }
+
         keepInsideTank(tankWidth);
     }
 
