@@ -54,6 +54,7 @@ public class Aquarium {
         }
     }
 
+
     public void listCreatureDetails() {
         System.out.println();
         System.out.println("CREATURE DETAILS");

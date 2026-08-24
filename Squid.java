@@ -7,7 +7,7 @@ public class Squid extends SeaCreature {
         super(name, position, speed, direction);
         tracker = 0; 
         movement = 1; 
-        symbol = "＜コ：ミ";
+        symbol = "<=]:E";
     }
 
     @Override

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class AquariumApp {
 
@@ -11,7 +12,7 @@ public class AquariumApp {
         tank[1] = new Fish("Dory", 30, 2, -2, "><((('>");
         tank[2] = new Fish("Chloe", 15, 1, -3, "><({{(º>");
         tank[3] = new Shark("Ava", 23, 4, 1);
-        tank[4] = new Squid("Vivian", 7, 1, 2);
+        tank[4] = new Squid("Vivi", 7, 1, 2);
 
 
         // =====================================================
@@ -49,17 +50,33 @@ public class AquariumApp {
                     aquarium.display();
                     break;
 
-                case "3":
+                case "3": //asisted by google gemini
+                    for (int i = 1; i <= 5; i++) {
+                        try {
+                            // Delays the loop for exactly 2 seconds
+                            TimeUnit.SECONDS.sleep(2); 
+                        } catch (InterruptedException e) {
+                            // Restore interrupted status
+                            Thread.currentThread().interrupt(); 
+                            aquarium.advanceTurn();
+                            aquarium.display();
+                                }   
+                            break;
+                        }
+                    }
+    }
+                    break;
+                case "4":
                     aquarium.listCreatureDetails();
                     break;
 
-                case "4":
+                case "5":
                     running = false;
                     System.out.println("Aquarium closed. Goodbye!");
                     break;
 
                 default:
-                    System.out.println("Please choose 1, 2, 3, or 4.");
+                    System.out.println("Please choose 1, 2, 3, 4 or 5.");
             }
         }
 
@@ -70,7 +87,8 @@ public class AquariumApp {
         System.out.println();
         System.out.println("1. View Aquarium");
         System.out.println("2. Advance One Turn");
-        System.out.println("3. View Creature Details");
-        System.out.println("4. Quit");
+        System.out.println("3. Free Swim");
+        System.out.println("4. View Creature Details");
+        System.out.println("5. Quit");
     }
 }
