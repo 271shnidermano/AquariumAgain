@@ -5,12 +5,22 @@ public abstract class SeaCreature {
     protected int speed;
     protected int direction;
 
-    public SeaCreature(String name, int position, int speed, int direction) {
-        this.name = name;
-        this.position = position;
-        this.speed = speed;
-        this.direction = direction;
+    public SeaCreature(String name, int position, int speed, int direction)
+        throws InvalidCreatureException {
+
+    if (name == null || !name.matches("[a-zA-Z]+")) { //notation assited by chatGPT
+        throw new InvalidCreatureException(
+            "Make sure your name is a String containing only letters, "+name+ " does not work");
     }
+     if (position < 0) { //notation assited by chatGPT
+        throw new InvalidCreatureException(
+            "Make sure your position is positive, "+position+ " does not work");
+    } 
+    this.name = name;
+    this.position = position;
+    this.speed = speed;
+    this.direction = direction;
+}
 
     // Each subclass decides how it moves.
     public abstract void move(int tankWidth);

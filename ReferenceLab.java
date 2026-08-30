@@ -1,4 +1,4 @@
-public class ReferenceLab {
+/*public class ReferenceLab {
 
     public static void main(String[] args) {
 
@@ -54,3 +54,4 @@ public class ReferenceLab {
         System.out.println("tank[0] position: " + tank[0].getPosition());
     }
 }
+*/

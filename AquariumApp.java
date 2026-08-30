@@ -7,14 +7,21 @@ public class AquariumApp {
 
         SeaCreature[] tank = new SeaCreature[8];
 
-        // Two starter creatures.
-        tank[0] = new Fish("Nemo", 4, 3, 1, "><>");
-        tank[1] = new Fish("Dory", 30, 2, -2, "><((('>");
-        tank[2] = new Fish("Chloe", 15, 1, -3, "><({{(º>");
-        tank[3] = new Shark("Ava", 23, 4, 1);
-        tank[4] = new Squid("Vivi", 7, 1, 2);
+        // Two starter creatures. //only prints the first thing to throw an exception?
+        try {
+            tank[0] = new Fish("Nemo", 4, 3, 1, "><>");
+            tank[1] = new Fish("Dory", 30, 2, -2, "><((('>");
+            tank[2] = new Fish("Chloe", 15, 1, -3, "><({{(º>");
+            tank[3] = new Shark("Ava", 23, 4, 1);
+            tank[4] = new Squid("Vivi", 7, 1, 2);
+            tank[5] = new Squid("972", 1, 1, 2);
+            tank[6] = new Fish("InvalidFish", -3, 1, 2, "><((('>");
+            tank[7] = new Shark("BadShark", -3, 1, 2);
 
-
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+       
         // =====================================================
         // STUDENT TODO
         // =====================================================
@@ -50,21 +57,22 @@ public class AquariumApp {
                     aquarium.display();
                     break;
 
-                case "3": //asisted by google gemini
-                    for (int i = 1; i <= 5; i++) {
+                case "3": //assisted by chat gpt for import statements and how to use sleep
+                    System.out.println("Free Swim starting...");
+                    
+                    for (int i = 0; i < 18; i++) {
+                        aquarium.advanceTurn();
+                        aquarium.display();
+
                         try {
-                            // Delays the loop for exactly 2 seconds
-                            TimeUnit.SECONDS.sleep(2); 
+                            TimeUnit.SECONDS.sleep(1);
                         } catch (InterruptedException e) {
-                            // Restore interrupted status
-                            Thread.currentThread().interrupt(); 
-                            aquarium.advanceTurn();
-                            aquarium.display();
-                                }   
+                            Thread.currentThread().interrupt();
                             break;
                         }
                     }
-    }
+                    
+                    System.out.println("Free Swim ended!");
                     break;
                 case "4":
                     aquarium.listCreatureDetails();

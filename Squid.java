@@ -3,7 +3,7 @@ public class Squid extends SeaCreature {
       private int tracker;
       private int movement; 
 
-    public Squid(String name, int position, int speed, int direction) {
+    public Squid(String name, int position, int speed, int direction) throws InvalidCreatureException {
         super(name, position, speed, direction);
         tracker = 0; 
         movement = 1; 
