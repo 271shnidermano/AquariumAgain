@@ -10,12 +10,43 @@ public class AquariumApp {
         // Two starter creatures. //only prints the first thing to throw an exception?
         try {
             tank[0] = new Fish("Nemo", 4, 3, 1, "><>");
+
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+        try {
             tank[1] = new Fish("Dory", 30, 2, -2, "><((('>");
+
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+          try {
             tank[2] = new Fish("Chloe", 15, 1, -3, "><({{(º>");
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+          try {
             tank[3] = new Shark("Ava", 23, 4, 1);
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+         try {
             tank[4] = new Squid("Vivi", 7, 1, 2);
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+         try {
             tank[5] = new Squid("972", 1, 1, 2);
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+         try {
             tank[6] = new Fish("InvalidFish", -3, 1, 2, "><((('>");
+
+        } catch (InvalidCreatureException e) {
+            System.out.println("Invalid creature: " + e.getMessage());
+        }
+          try {
             tank[7] = new Shark("BadShark", -3, 1, 2);
 
         } catch (InvalidCreatureException e) {

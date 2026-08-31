@@ -8,11 +8,11 @@ public abstract class SeaCreature {
     public SeaCreature(String name, int position, int speed, int direction)
         throws InvalidCreatureException {
 
-    if (name == null || !name.matches("[a-zA-Z]+")) { //notation assited by chatGPT
+    if (name == null || !name.matches("[a-zA-Z]+" )) { //notation assited by chatGPT
         throw new InvalidCreatureException(
             "Make sure your name is a String containing only letters, "+name+ " does not work");
     }
-     if (position < 0) { //notation assited by chatGPT
+     if (position < 0) { 
         throw new InvalidCreatureException(
             "Make sure your position is positive, "+position+ " does not work");
     } 
