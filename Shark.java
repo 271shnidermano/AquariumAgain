@@ -2,8 +2,8 @@ public class Shark extends SeaCreature{
    
     private String symbol;
 
-    public Shark(String name, int position, int speed, int direction) throws InvalidCreatureException {
-        super(name, position, speed, direction);
+    public Shark(String name, int position, int speed, int direction, String color) throws InvalidCreatureException {
+        super(name, position, speed, direction, color);
         symbol = "⟩<^,«⋗";
     }
 

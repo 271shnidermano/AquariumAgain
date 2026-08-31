@@ -81,23 +81,35 @@ public class Aquarium {
     public int getTurnNumber() {
         return turnNumber;
     }
-
+//assisted by chatGPT for colors
     private String buildLane(SeaCreature creature) {
-        char[] lane = new char[TANK_WIDTH];
-        Arrays.fill(lane, ' ');
+    char[] lane = new char[TANK_WIDTH];
+    Arrays.fill(lane, ' ');
 
-        String symbol = creature.getSymbol();
-        int start = Math.max(0,
-                Math.min(creature.getPosition(), TANK_WIDTH - symbol.length()));
+    String symbol = creature.getSymbol();
 
-        for (int i = 0; i < symbol.length() && start + i < lane.length; i++) {
-            lane[start + i] = symbol.charAt(i);
-        }
+    int start = Math.max(0,
+            Math.min(creature.getPosition(), TANK_WIDTH - symbol.length()));
 
-        return "|" + new String(lane) + "| "
-                + creature.getName() + " ("
-                + creature.getClass().getSimpleName() + ")";
+    for (int i = 0; i < symbol.length() && start + i < lane.length; i++) {
+        lane[start + i] = symbol.charAt(i);
     }
+
+    String coloredLane = creature.getColorCode()
+            + new String(lane)
+            + "\u001B[0m";
+
+    String before = new String(lane, 0, start);
+String coloredSymbol = creature.getColorCode()
+        + symbol
+        + "\u001B[0m";
+String after = new String(lane, start + symbol.length(),
+        TANK_WIDTH - start - symbol.length());
+
+return "|" + before + coloredSymbol + after + "| "
+        + creature.getName() + " ("
+        + creature.getClass().getSimpleName() + ")";
+}
 
     private String center(String text, int width) {
         if (text.length() >= width) {
