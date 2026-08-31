@@ -17,6 +17,10 @@ public abstract class SeaCreature {
         throw new InvalidCreatureException(
             "Make sure your position is positive, "+position+ " does not work");
     } 
+    if(color == null || !color.matches("[a-zA-Z]+" )) {
+        throw new InvalidCreatureException("You need to enter a valid color!");
+    }
+
     this.name = name;
     this.position = position;
     this.speed = speed;

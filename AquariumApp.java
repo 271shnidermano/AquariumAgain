@@ -47,7 +47,7 @@ public class AquariumApp {
             System.out.println("Invalid creature: " + e.getMessage());
         }
           try {
-            tank[7] = new Shark("BadShark", -3, 1, 2, "blue");
+            tank[7] = new Shark("BadShark", 3, 1, 2, "89");
 
         } catch (InvalidCreatureException e) {
             System.out.println("Invalid creature: " + e.getMessage());
