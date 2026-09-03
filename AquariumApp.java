@@ -1,5 +1,12 @@
-import java.util.Scanner;
+import java.util.Scanner; 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+
+
+
 
 public class AquariumApp {
 
@@ -8,49 +15,13 @@ public class AquariumApp {
         SeaCreature[] tank = new SeaCreature[8];
 
         // Two starter creatures. //only prints the first thing to throw an exception?
-        try {
-            tank[0] = new Fish("Nemo", 4, 3, 1, "><>", "orange");
-
+       
+       try {
+        loadCreatures("Creature.txt");
         } catch (InvalidCreatureException e) {
             System.out.println("Invalid creature: " + e.getMessage());
-        }
-        try {
-            tank[1] = new Fish("Dory", 30, 2, -2, "><((('>", "blue");
-
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        }
-          try {
-            tank[2] = new Fish("Chloe", 15, 1, -3, "><({{(º>", "red");
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        }
-          try {
-            tank[3] = new Shark("Ava", 23, 4, 1, "green");
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        }
-         try {
-            tank[4] = new Squid("Vivi", 7, 1, 2, "blue");
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        }
-         try {
-            tank[5] = new Squid("972", 1, 1, 2, "red");
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        }
-         try {
-            tank[6] = new Fish("InvalidFish", -3, 1, 2, "><((('>", "yellow");
-
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        }
-          try {
-            tank[7] = new Shark("BadShark", 3, 1, 2, "89");
-
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Could not load creatures: " + e.getMessage());
         }
        
         // =====================================================
@@ -131,3 +102,48 @@ public class AquariumApp {
         System.out.println("5. Quit");
     }
 }
+private static SeaCreature[] loadCreatures(String fileName)  throws IOException {
+
+    FileReader file = new FileReader(fileName);
+    Scanner input = new Scanner(file);
+
+    int numberOfCreatures = input.nextInt();
+    input.nextLine();
+
+    SeaCreature[] tank =  new SeaCreature[numberOfCreatures];
+    
+    for (int i = 0; i < tank.length; i++) {
+        String line = input.nextLine();
+        tank[i] = createCreature(line);
+    }
+    input.close();
+    return tank;
+}
+
+private static SeaCreature createCreature(String line)
+{
+    Scanner data = new Scanner(line);
+    data.useDelimiter(",");
+    String type = data.next();
+    String name = data.next();
+    int position = data.nextInt();
+    int speed = data.nextInt();
+    int direction = data.nextInt();
+    String color = data.next();
+  
+    if (type.equalsIgnoreCase("Fish")) 
+    {
+        String symbol = data.next();
+     return new Fish(name, position, speed, direction, symbol);
+    }
+    else if(type.equalsIgnoreCase("Shark"))
+    {
+        return new Squid(name, position, speed, direction);
+    }
+    else
+    {
+        return new Shark(name, position, speed, direction);
+    }
+    
+}
+        
