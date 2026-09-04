@@ -8,6 +8,8 @@ public class Fish extends SeaCreature {
     this.symbol = symbol;
 }
 
+
+
     @Override
     public void move(int tankWidth) {
         position += speed * direction;

@@ -95,15 +95,11 @@ public class Aquarium {
         lane[start + i] = symbol.charAt(i);
     }
 
-    String coloredLane = creature.getColorCode()
-            + new String(lane)
-            + "\u001B[0m";
-
     String before = new String(lane, 0, start);
-String coloredSymbol = creature.getColorCode()
+    String coloredSymbol = creature.getColorCode()
         + symbol
         + "\u001B[0m";
-String after = new String(lane, start + symbol.length(),
+    String after = new String(lane, start + symbol.length(),
         TANK_WIDTH - start - symbol.length());
 
 return "|" + before + coloredSymbol + after + "| "

@@ -1,12 +1,7 @@
-import java.util.Scanner; 
+import java.util.Scanner;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.PrintWriter;
-
-
-
 
 public class AquariumApp {
 
@@ -14,16 +9,16 @@ public class AquariumApp {
 
         SeaCreature[] tank = new SeaCreature[8];
 
-        // Two starter creatures. //only prints the first thing to throw an exception?
-       
-       try {
-        loadCreatures("Creature.txt");
-        } catch (InvalidCreatureException e) {
-            System.out.println("Invalid creature: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Could not load creatures: " + e.getMessage());
-        }
-       
+        // Load creatures from Creature.txt.
+      try {
+    tank = loadCreatures("Creature.txt");
+    System.out.println("Loaded " + tank.length + " creatures!");
+    } catch (InvalidCreatureException e) {
+        System.out.println("Invalid creature: " + e.getMessage());
+    } catch (IOException e) {
+        System.out.println("Could not load creatures: " + e.getMessage());
+    }
+
         // =====================================================
         // STUDENT TODO
         // =====================================================
@@ -59,9 +54,9 @@ public class AquariumApp {
                     aquarium.display();
                     break;
 
-                case "3": //assisted by chat gpt for import statements and how to use sleep
+                case "3":
                     System.out.println("Free Swim starting...");
-                    
+
                     for (int i = 0; i < 18; i++) {
                         aquarium.advanceTurn();
                         aquarium.display();
@@ -73,9 +68,10 @@ public class AquariumApp {
                             break;
                         }
                     }
-                    
+
                     System.out.println("Free Swim ended!");
                     break;
+
                 case "4":
                     aquarium.listCreatureDetails();
                     break;
@@ -101,49 +97,68 @@ public class AquariumApp {
         System.out.println("4. View Creature Details");
         System.out.println("5. Quit");
     }
+
+    // =====================================================
+    // LOAD CREATURES FROM FILE
+    // =====================================================
+
+    public static SeaCreature[] loadCreatures(String fileName)
+            throws IOException, InvalidCreatureException {
+
+        FileReader file = new FileReader(fileName);
+        Scanner input = new Scanner(file);
+
+        int numberOfCreatures = input.nextInt();
+        input.nextLine();
+
+        SeaCreature[] tank = new SeaCreature[numberOfCreatures];
+
+        for (int i = 0; i < tank.length; i++) {
+            String line = input.nextLine();
+            tank[i] = createCreature(line);
+        }
+
+        input.close();
+        return tank;
+    }
+
+    // =====================================================
+    // CREATE CREATURE BASED ON FILE TYPE
+    // =====================================================
+
+    public static SeaCreature createCreature(String line)
+            throws InvalidCreatureException {
+
+        Scanner data = new Scanner(line);
+        data.useDelimiter(",");
+
+        String type = data.next();
+        String name = data.next();
+        int position = data.nextInt();
+        int speed = data.nextInt();
+        int direction = data.nextInt();
+        String color = data.next();
+
+        if (type.equalsIgnoreCase("Fish")) {
+            String symbol = data.next();
+            data.close();
+            return new Fish(name, position, speed, direction, symbol, color);
+        }
+
+        else if (type.equalsIgnoreCase("Shark")) {
+            data.close();
+            return new Shark(name, position, speed, direction, color);
+        }
+
+        else if (type.equalsIgnoreCase("Squid")) {
+            data.close();
+            return new Squid(name, position, speed, direction, color);
+        }
+
+        else {
+            data.close();
+            throw new InvalidCreatureException(
+                    "Unknown creature type: " + type);
+        }
+    }
 }
-private static SeaCreature[] loadCreatures(String fileName)  throws IOException {
-
-    FileReader file = new FileReader(fileName);
-    Scanner input = new Scanner(file);
-
-    int numberOfCreatures = input.nextInt();
-    input.nextLine();
-
-    SeaCreature[] tank =  new SeaCreature[numberOfCreatures];
-    
-    for (int i = 0; i < tank.length; i++) {
-        String line = input.nextLine();
-        tank[i] = createCreature(line);
-    }
-    input.close();
-    return tank;
-}
-
-private static SeaCreature createCreature(String line)
-{
-    Scanner data = new Scanner(line);
-    data.useDelimiter(",");
-    String type = data.next();
-    String name = data.next();
-    int position = data.nextInt();
-    int speed = data.nextInt();
-    int direction = data.nextInt();
-    String color = data.next();
-  
-    if (type.equalsIgnoreCase("Fish")) 
-    {
-        String symbol = data.next();
-     return new Fish(name, position, speed, direction, symbol);
-    }
-    else if(type.equalsIgnoreCase("Shark"))
-    {
-        return new Squid(name, position, speed, direction);
-    }
-    else
-    {
-        return new Shark(name, position, speed, direction);
-    }
-    
-}
-        
