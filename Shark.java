@@ -4,7 +4,7 @@ public class Shark extends SeaCreature{
 
     public Shark(String name, int position, int speed, int direction, String color) throws InvalidCreatureException {
         super(name, position, speed, direction, color);
-        symbol = "⟩<^,«⋗";
+        symbol = "><^,«>";
     }
 
     @Override

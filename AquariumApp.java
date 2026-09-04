@@ -115,7 +115,12 @@ public class AquariumApp {
 
         for (int i = 0; i < tank.length; i++) {
             String line = input.nextLine();
-            tank[i] = createCreature(line);
+            try {
+                tank[i] = createCreature(line);
+            } catch (InvalidCreatureException e) {
+                System.out.println("Skipping invalid creature on line "
+                        + (i + 2) + ": " + e.getMessage());
+            }
         }
 
         input.close();
@@ -131,7 +136,6 @@ public class AquariumApp {
 
         Scanner data = new Scanner(line);
         data.useDelimiter(",");
-
         String type = data.next();
         String name = data.next();
         int position = data.nextInt();
@@ -160,5 +164,8 @@ public class AquariumApp {
             throw new InvalidCreatureException(
                     "Unknown creature type: " + type);
         }
+        
+
+        
     }
 }

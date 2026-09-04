@@ -1,9 +1,10 @@
-8
+9
 Squid,Chloe,3,2,2,red
 Fish,Justine,2,2,1,yellow,><>
 Shark,Ava,6,2,-2,blue
-Fish,Tiv,2,4,-1,orange,><(((°>
+Fish,Tiv,2,4,-1,orange,><{{{°>
 Squid,Dina,8,3,2,purple
-Fish,Scott,1,6,4,green,><>
+f,Scott,1,6,4,green,><>
 Shark,Olivia,12,2,2,orange
 Fish,Rito,10,2,-1,cyan,><((('>
+Shark,Request,15,3,-1,cyan
